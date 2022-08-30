@@ -42,6 +42,6 @@ sudo apt-get -y install \
     libz-dev \
     luarocks >> /dev/null
 
-pip3 install asyncio
-pip3 install aiohttp
-sudo luarocks install luasocket
+pip3 install asyncio >> /dev/null
+pip3 install aiohttp >> /dev/null
+sudo luarocks install luasocket >> /dev/null

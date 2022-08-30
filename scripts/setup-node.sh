@@ -8,6 +8,11 @@ echo "dir: " $DIR
 echo "root: " $ROOT
 echo "scripts: " $SCRIPTS
 
+#! Disable swap
+sudo swapoff -a
+#! Keeps the swap off during reboot
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
 #! Disable auto updates for the system:
 echo "Disabling auto updates..."
 $SCRIPTS/disable_auto_updates.sh
