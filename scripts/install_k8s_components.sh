@@ -7,7 +7,13 @@ sudo apt-get -y install btrfs-progs pkg-config libseccomp-dev unzip tar libsecco
 sudo apt-get -y install apparmor apparmor-utils >> /dev/null        # needed for containerd versions >1.5.x
 
 wget --continue --quiet https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf containerd-1.6.8-linux-amd64.tar.gz
+sudo tar Czxvf /usr/local -xzf containerd-1.6.8-linux-amd64.tar.gz
+
+wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+sudo mv containerd.service /usr/lib/systemd/system/
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now containerd
 
 wget --continue --quiet https://github.com/opencontainers/runc/releases/download/v1.1.4/runc.amd64
 mv runc.amd64 runc
@@ -40,6 +46,4 @@ EOF
 
 sudo sysctl --system
 
-sudo mkdir -p /etc/containerd
-containerd config default | sudo tee /etc/containerd/config.toml
 sudo systemctl restart containerd
