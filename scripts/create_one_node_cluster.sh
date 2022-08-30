@@ -18,8 +18,6 @@ if [ "$EUID" -eq 0 ]; then
 fi
 
 
-# Untaint master (allow pods to be scheduled on master)
-kubectl taint nodes --all node-role.kubernetes.io/master-
 
 #! Setup for master node:
 $SCRIPTS/setup_master_node.sh

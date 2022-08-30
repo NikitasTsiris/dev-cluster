@@ -5,6 +5,10 @@ ROOT="$( cd $DIR && cd .. && pwd)"
 SCRIPTS=$ROOT/scripts
 CRI_SOCK="/run/containerd/containerd.sock"
 
+
+# Untaint master (allow pods to be scheduled on master)
+kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 #! Instal calico network add-on:
 curl https://docs.projectcalico.org/manifests/calico.yaml -O
 
