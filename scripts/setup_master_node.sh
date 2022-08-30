@@ -35,19 +35,3 @@ istioctl install --set profile=default -y
 
 #! Enable sidecar injection in default namespace
 kubectl label namespace default istio-injection=enabled --overwrite
-
-#! Needed in order to expose the metrics' services
-INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-$ export INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
-
-#! Expose the metric services to be access via istio ingress gateway
-kubectl apply -f $ROOT/configs/kiali/expose-kiali.yaml
-kubectl apply -f $ROOT/configs/grafana/expose-grafana.yaml
-kubectl apply -f $ROOT/configs/prometheus/expose-prometheus.yaml
-kubectl apply -f $ROOT/configs/tracing/expose-tracing.yaml
-
-#! Metrics can be accessed via:
-#* Kiali: http://kiali.${INGRESS_DOMAIN}
-#* Prometheus: http://prometheus.${INGRESS_DOMAIN}
-#* Grafana: http://grafana.${INGRESS_DOMAIN}
-#* Tracing: http://tracing.${INGRESS_DOMAIN}
