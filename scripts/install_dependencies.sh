@@ -37,7 +37,6 @@ sudo sh -c  "echo 'export PATH=\$PATH:/usr/local/go/bin' >> /etc/profile"
 # Install Dependencies for Social Network Microservice Benchmark
 sudo apt-get -y install \
     python3 \
-    pip3 \
     libssl-dev \
     libz-dev \
     luarocks >> /dev/null

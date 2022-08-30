@@ -9,13 +9,17 @@ echo "root: " $ROOT
 echo "scripts: " $SCRIPTS
 
 #! Disable auto updates for the system:
+echo "Disabling auto updates..."
 $SCRIPTS/disable_auto_updates.sh
 
+echo "Installing necessary software dependencies..."
 #! Install necessary software dependencies:
 $SCRIPTS/install_dependencies.sh
 
 #! Install K8s components:
+echo "Installing K8s components and configurations..."
 $SCRIPTS/install_k8s_components.sh
 
 #! Set up kubelet:
+echo "Setting up kubelet..."
 $SCRIPTS/setup_kubelet.sh
