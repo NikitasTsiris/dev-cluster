@@ -35,3 +35,9 @@ istioctl install --set profile=default -y
 
 #! Enable sidecar injection in default namespace
 kubectl label namespace default istio-injection=enabled --overwrite
+
+#! Needed in order to expose the metrics' services
+INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
+
+. $SCRIPTS/deploy_metric_services.sh
