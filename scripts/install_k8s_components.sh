@@ -47,5 +47,5 @@ EOF
 sudo sysctl --system
 
 sudo mkdir -p /etc/containerd
-containerd config default | sudo tee /etc/containerd/config.toml
+containerd config default | sudo tee /etc/containerd/config.toml >> /dev/null
 sudo systemctl restart containerd
