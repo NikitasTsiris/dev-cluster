@@ -5,8 +5,8 @@ ROOT="$( cd $DIR && cd .. && pwd)"
 SCRIPTS=$ROOT/scripts
 
 #! Needed in order to expose the metrics' services
-INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-$ export INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
+export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+export INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
 
 #! Expose the metric services to be access via istio ingress gateway
 kubectl apply -f $ROOT/configs/kiali/expose-kiali.yaml
