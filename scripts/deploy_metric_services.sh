@@ -1,5 +1,9 @@
 #! /bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+ROOT="$( cd $DIR && cd .. && pwd)"
+SCRIPTS=$ROOT/scripts
+
 #! Needed in order to expose the metrics' services
 INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 $ export INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
