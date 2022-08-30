@@ -29,4 +29,4 @@ cd $ROOT
 curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.14.3 TARGET_ARCH=x86_64 sh -
 export PATH=$PATH:$ROOT/istio-1.14.3/bin
 sudo sh -c  "echo 'export PATH=\$PATH:$ROOT/istio-1.14.3/bin' >> /etc/profile"
-istioctl install
+istioctl install --set profile=default -y

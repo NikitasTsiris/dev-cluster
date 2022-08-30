@@ -1,8 +1,12 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
+apiVersion: v1
+kind: ConfigMap
 metadata:
   namespace: metallb-system
-  name: first-pool
-spec:
-  addresses:
-    - 192.168.121.230-192.168.121.250
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: custom-ip-space
+      protocol: layer2
+      addresses:
+      - 192.168.121.230-192.168.121.250
