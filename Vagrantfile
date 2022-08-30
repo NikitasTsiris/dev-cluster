@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
       v.cpus    = 10
     end
 
-    #config.vm.provision "shell", inline: $script
+    config.vm.provision "shell", inline: $script
 
   end
 end
