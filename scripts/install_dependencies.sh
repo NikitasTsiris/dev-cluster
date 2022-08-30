@@ -25,14 +25,18 @@ sudo apt-get -y install \
 
 # Install Go
 set -e
-
 wget --continue --quiet https://golang.org/dl/go1.18.linux-amd64.tar.gz
-
 sudo tar -C /usr/local -xzf go1.18.linux-amd64.tar.gz
-
 export PATH=$PATH:/usr/local/go/bin
-
 sudo sh -c  "echo 'export PATH=\$PATH:/usr/local/go/bin' >> /etc/profile"
+source /etc/profile
+rm go1.18.linux-amd64.tar.gz
+
+# Install Helm:
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+rm get_helm.sh
 
 # Install Dependencies for Social Network Microservice Benchmark
 sudo apt-get -y install \

@@ -8,6 +8,7 @@ sudo apt-get -y install apparmor apparmor-utils >> /dev/null        # needed for
 
 wget --continue --quiet https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-amd64.tar.gz
 sudo tar -C /usr/local -xvzf containerd-1.6.8-linux-amd64.tar.gz
+rm containerd-1.6.8-linux-amd64.tar.gz
 
 wget --continue --quiet https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
 sudo mv containerd.service /usr/lib/systemd/system/
@@ -18,6 +19,7 @@ sudo systemctl enable --now containerd
 wget --continue --quiet https://github.com/opencontainers/runc/releases/download/v1.1.4/runc.amd64
 mv runc.amd64 runc
 sudo install -D -m0755 runc /usr/local/sbin/runc
+rm runc
 
 containerd --version || echo "failed to build containerd"
 
