@@ -22,8 +22,6 @@ Vagrant.configure("2") do |config|
       v.cpus    = 10
     end
 
-    config.vm.provision "shell",
-    inline: $script,
-    privileged = false
+    config.vm.provision "shell", inline: $script, privileged = false
   end
 end
