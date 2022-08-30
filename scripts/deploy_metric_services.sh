@@ -4,11 +4,17 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ROOT="$( cd $DIR && cd .. && pwd)"
 SCRIPTS=$ROOT/scripts
 
-#! Needed in order to expose the metrics' services
-INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-#INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
-sudo sh -c  "echo 'export INGRESS_DOMAIN=${INGRESS_HOST}.nip.io' >> /etc/profile"
-source /etc/profile
+
+#! Deploy metric tools:
+# -> Prometheus
+# -> Grafana
+# -> Kiali
+# -> Jaeger
+kubectl apply -f $ROOT/istio-1.14.3/samples/addons/
+
+#! Export the variables needed by metrics in ordered to be accessed by the
+#! following yaml files:
+source $SCRIPTS/ingress_env_variables.sh
 
 #! Expose the metric services to be access via istio ingress gateway
 kubectl apply -f $ROOT/configs/kiali/expose-kiali.yaml
