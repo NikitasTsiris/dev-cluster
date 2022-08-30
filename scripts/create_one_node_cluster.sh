@@ -20,4 +20,4 @@ fi
 
 
 #! Setup for master node:
-. $SCRIPTS/setup_master_node.sh
+$SCRIPTS/setup_master_node.sh
