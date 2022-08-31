@@ -12,7 +12,7 @@ spec:
         name: http-prom
         protocol: HTTP
       hosts:
-        - "prometheus.${INGRESS_DOMAIN}"
+        - "prometheus.INGRESS_DOMAIN"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -21,7 +21,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - "prometheus.${INGRESS_DOMAIN}"
+    - "prometheus.INGRESS_DOMAIN"
   gateways:
     - prometheus-gateway
   http:

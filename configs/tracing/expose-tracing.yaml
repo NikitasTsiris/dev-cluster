@@ -12,7 +12,7 @@ spec:
         name: http-tracing
         protocol: HTTP
       hosts:
-        - "tracing.${INGRESS_DOMAIN}"
+        - "tracing.INGRESS_DOMAIN"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -21,7 +21,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - "tracing.${INGRESS_DOMAIN}"
+    - "tracing.INGRESS_DOMAIN"
   gateways:
     - tracing-gateway
   http:

@@ -12,7 +12,7 @@ spec:
         name: http-grafana
         protocol: HTTP
       hosts:
-        - "grafana.${INGRESS_DOMAIN}"
+        - "grafana.INGRESS_DOMAIN"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -21,7 +21,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - "grafana.${INGRESS_DOMAIN}"
+    - "grafana.INGRESS_DOMAIN"
   gateways:
     - grafana-gateway
   http:
