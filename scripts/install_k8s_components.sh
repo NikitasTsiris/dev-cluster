@@ -1,30 +1,42 @@
 #! /bin/bash
 
+# Reset
+Color_Off='\033[0m'       # Text Reset
+# Bold
+BBlack='\033[1;30m'       # Black
+BRed='\033[1;31m'         # Red
+BGreen='\033[1;32m'       # Green
+
 sudo apt-get update >> /dev/null
 
 #! Install containerd and runc
+echo "${BGreen}Installing runc dependencies...${Color_Off}"
 sudo apt-get -y install btrfs-progs pkg-config libseccomp-dev unzip tar libseccomp2 socat util-linux apt-transport-https curl ipvsadm >> /dev/null
 sudo apt-get -y install apparmor apparmor-utils >> /dev/null        # needed for containerd versions >1.5.x
 
+echo "${BGreen}Installing runc binary...${Color_Off}"
+wget --continue --quiet https://github.com/opencontainers/runc/releases/download/v1.1.4/runc.amd64
+mv runc.amd64 runc
+sudo install -D -m0755 runc /usr/local/sbin/runc
+rm runc
+
+echo "${BGreen}Installing containerd binary...${Color_Off}"
 wget --continue --quiet https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-amd64.tar.gz
 sudo tar -C /usr/local -xvzf containerd-1.6.8-linux-amd64.tar.gz
 rm containerd-1.6.8-linux-amd64.tar.gz
 
+echo "${BGreen}Installing containerd service...${Color_Off}"
 wget --continue --quiet https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
 sudo mv containerd.service /usr/lib/systemd/system/
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now containerd
 
-wget --continue --quiet https://github.com/opencontainers/runc/releases/download/v1.1.4/runc.amd64
-mv runc.amd64 runc
-sudo install -D -m0755 runc /usr/local/sbin/runc
-rm runc
-
-containerd --version || echo "failed to build containerd"
+containerd --version || echo "${BRed}failed to build containerd${Color_Off}"
 
 #! Install K8s
 K8S_VERSION=1.24.3-00
+echo "${BGreen}Installing Kubernetes components version: ${Color_Off}" ${K8S_VERSION}
 curl --silent --show-error https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo sh -c "echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.list"
 sudo apt-get update >> /dev/null
