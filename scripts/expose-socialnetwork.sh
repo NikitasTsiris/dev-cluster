@@ -23,7 +23,7 @@ kubectl apply -f <(sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/socialnetw
 kubectl apply -f <(sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/socialnetwork/media-frontend.yaml)
 kubectl apply -f <(sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/socialnetwork/jaeger.yaml)
 
-echo "${BGreen}SocialNetwork frontend services can be accessed via: ${Color_Off}"
-echo "${BGreen}Nginx:${Color_Off} http://nginx.${INGRESS_DOMAIN}"
-echo "${BGreen}Media:${Color_Off} http://media.${INGRESS_DOMAIN}"
-echo "${BGreen}Jaeger:${Color_Off} http://jaeger.${INGRESS_DOMAIN}"
+echo -e "${BGreen}SocialNetwork frontend services can be accessed via: ${Color_Off}"
+echo -e "${BGreen}Nginx:${Color_Off} http://nginx.${INGRESS_DOMAIN}"
+echo -e "${BGreen}Media:${Color_Off} http://media.${INGRESS_DOMAIN}"
+echo -e "${BGreen}Jaeger:${Color_Off} http://jaeger.${INGRESS_DOMAIN}"

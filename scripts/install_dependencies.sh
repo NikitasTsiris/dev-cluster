@@ -31,7 +31,7 @@ sudo apt-get -y install \
     git-lfs >> /dev/null
 
 # Install Go
-echo "${BGreen}Installing Go...${Color_Off}"
+echo -e "${BGreen}Installing Go...${Color_Off}"
 set -e
 wget --continue --quiet https://golang.org/dl/go1.18.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.18.linux-amd64.tar.gz
@@ -41,14 +41,14 @@ source /etc/profile
 rm go1.18.linux-amd64.tar.gz
 
 # Install Helm:
-echo "${BGreen}Installing Helm...${Color_Off}"
+echo -e "${BGreen}Installing Helm...${Color_Off}"
 curl --silent --show-error -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
 rm get_helm.sh
 
 # Install Dependencies for Social Network Microservice Benchmark
-echo "${BGreen}Installing python and dependencies for SocialNetwork benchmark...${Color_Off}"
+echo -e "${BGreen}Installing python and dependencies for SocialNetwork benchmark...${Color_Off}"
 sudo apt-get -y install \
     python3 \
     python3-pip \

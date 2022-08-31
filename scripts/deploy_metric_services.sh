@@ -18,19 +18,19 @@ export SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressga
 export TCP_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="tcp")].port}')
 export INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
 
-echo "${BGreen}ENV variables for Istio ingress:${Color_Off}"
-echo "${BGreen}INGRESS_HOST: " $INGRESS_HOST
-echo "${BGreen}INGRESS_PORT: " $INGRESS_PORT
-echo "${BGreen}SECURE_INGRESS_PORT: " $SECURE_INGRESS_PORT
-echo "${BGreen}TCP_INGRESS_PORT: " $TCP_INGRESS_PORT
-echo "${BGreen}INGRESS_DOMAIN: " $INGRESS_DOMAIN
+echo -e "${BGreen}ENV variables for Istio ingress:${Color_Off}"
+echo -e "${BGreen}INGRESS_HOST: " $INGRESS_HOST
+echo -e "${BGreen}INGRESS_PORT: " $INGRESS_PORT
+echo -e "${BGreen}SECURE_INGRESS_PORT: " $SECURE_INGRESS_PORT
+echo -e "${BGreen}TCP_INGRESS_PORT: " $TCP_INGRESS_PORT
+echo -e "${BGreen}INGRESS_DOMAIN: " $INGRESS_DOMAIN
 
 #! Deploy metric tools:
 # -> Prometheus
 # -> Grafana
 # -> Kiali
 # -> Jaeger
-echo "${BGreen}Deploying istio addons: Kiali, Grafana, Prometheus, Jaeger Tracing...${Color_Off}"
+echo -e "${BGreen}Deploying istio addons: Kiali, Grafana, Prometheus, Jaeger Tracing...${Color_Off}"
 kubectl apply -f $ROOT/istio-1.14.3/samples/addons/
 
 #! Expose the metric services to be access via istio ingress gateway
@@ -40,7 +40,7 @@ kubectl apply -f <(sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/configs/pr
 kubectl apply -f <(sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/configs/tracing/expose-tracing.yaml)
 
 echo  "Metric and Visualization Services can be accessed via:${Color_Off}"
-echo "${BGreen}Kiali:${Color_Off} http://kiali.${INGRESS_DOMAIN}"
-echo "${BGreen}Prometheus:${Color_Off} http://prometheus.${INGRESS_DOMAIN}"
+echo -e "${BGreen}Kiali:${Color_Off} http://kiali.${INGRESS_DOMAIN}"
+echo -e "${BGreen}Prometheus:${Color_Off} http://prometheus.${INGRESS_DOMAIN}"
 echo  "Grafana:${Color_Off} http://grafana.${INGRESS_DOMAIN}"
-echo "${BGreen}Tracing:${Color_Off} http://tracing.${INGRESS_DOMAIN}"
+echo -e "${BGreen}Tracing:${Color_Off} http://tracing.${INGRESS_DOMAIN}"
