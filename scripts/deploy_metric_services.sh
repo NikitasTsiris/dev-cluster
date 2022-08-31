@@ -19,7 +19,7 @@ export INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
 kubectl apply -f $ROOT/istio-1.14.3/samples/addons/
 
 #! Expose the metric services to be access via istio ingress gateway
-sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/config/kiali/expose-kiali.yaml | \
+sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/configs/kiali/expose-kiali.yaml | \
 kubectl apply -f -
 sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/configs/grafana/expose-grafana.yaml | \
 kubectl apply -f -
