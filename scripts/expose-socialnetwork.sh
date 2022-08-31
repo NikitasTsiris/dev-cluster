@@ -11,29 +11,14 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ROOT="$( cd $DIR && cd .. && pwd)"
 SCRIPTS=$ROOT/scripts
 
-ADDED_PORTS="ports:
-    - name: http
-      nodePort: 30001
-      port: 8080
-      protocol: TCP
-      targetPort: 8080
-    - name: http
-      nodePort: 30002
-      port: 8081
-      protocol: TCP
-      targetPort: 8081
-    - name: http
-      nodePort: 30003
-      port: 16686
-      protocol: TCP
-      targetPort: 16686"
-
 #! Needed in order to expose the metrics' services
 export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
-#! Configure istio ingress gateway to open the ports needed for the socialnetwork's services
-sed -e "s/ports:/${ADDED_PORTS}/" <(kubectl get svc istio-ingressgateway -n istio-system -o yaml)| \
-kubectl apply -f -
+#!
+#!
+#TODO: Need to configure istio ingress gateway to open the ports needed for the socialnetwork's services
+#!
+#!
 
 #! Expose the nginx-thrift, media-frontend and jaeger for the social network application:
 kubectl apply -f $ROOT/socialnetwork/nginx-thrift.yaml
