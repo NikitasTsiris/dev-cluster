@@ -4,6 +4,7 @@
 $script = <<-SCRIPT
 cd /home/vagrant/
 git clone https://github.com/NikitasTsiris/dev-cluster.git
+git clone https://github.com/delimitrou/DeathStarBench.git
 SCRIPT
 
 Vagrant.configure("2") do |config|
