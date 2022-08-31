@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
 
     node.vm.provider :libvirt do |v|
       v.cpu_mode = "host-passthrough"
-      v.memory  = 12288
+      v.memory  = 10240
       v.nested  = true
       v.cpus    = 10
     end

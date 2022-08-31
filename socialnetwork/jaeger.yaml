@@ -6,12 +6,12 @@ spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
   servers:
-  - port:
-      number: 80
-      name: http-jaeger
-      protocol: HTTP
-    hosts:
-    - "jaeger.INGRESS_DOMAIN"
+    - port:
+        number: 16686
+        name: http-jaeger
+        protocol: HTTP
+      hosts:
+        - "*"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -19,12 +19,12 @@ metadata:
   name: jaeger-vs
 spec:
   hosts:
-  - "jaeger.INGRESS_DOMAIN"
+    - "*"
   gateways:
-  - jaeger-gateway
+    - jaeger-gateway
   http:
-  - route:
-    - destination:
-        host: jaeger
-        port:
-          number: 16686
+    - route:
+        - destination:
+            host: jaeger
+            port:
+              number: 16686
