@@ -19,7 +19,7 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 #! Instal calico network add-on:
 echo -e "${BGreen}Deploying Calico network adapter...${Color_Off}"
-curl --quiet --continue https://docs.projectcalico.org/manifests/calico.yaml -O
+curl --silent --show-error  https://docs.projectcalico.org/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
 
 #! Configure cluster for metallb installation
@@ -40,7 +40,7 @@ kubectl apply -f $ROOT/configs/metallb/metallb-configmap.yaml
 cd $ROOT
 ISTIO_VERSION=1.14.3
 echo -e "${BGreen}Installing Istio version: ${Color_Off} ${ISTIO_VERSION}"
-curl --quiet --continue -L https://istio.io/downloadIstio | ISTIO_VERSION=$ISTIO_VERSION TARGET_ARCH=x86_64 sh -
+curl --silent --show-error -L https://istio.io/downloadIstio | ISTIO_VERSION=$ISTIO_VERSION TARGET_ARCH=x86_64 sh -
 export PATH=$PATH:$ROOT/istio-1.14.3/bin
 sudo sh -c  "echo 'export PATH=\$PATH:$ROOT/istio-1.14.3/bin' >> /etc/profile"
 source /etc/profile
