@@ -19,11 +19,11 @@ export TCP_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgatew
 export INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
 
 echo -e "${BGreen}ENV variables for Istio ingress:${Color_Off}"
-echo -e "${BGreen}INGRESS_HOST: ${Color_Off} ${INGRESS_HOST}"
-echo -e "${BGreen}INGRESS_PORT: ${Color_Off} ${INGRESS_PORT}"
+echo -e "${BGreen}INGRESS_HOST: ${Color_Off}        ${INGRESS_HOST}"
+echo -e "${BGreen}INGRESS_PORT: ${Color_Off}        ${INGRESS_PORT}"
 echo -e "${BGreen}SECURE_INGRESS_PORT: ${Color_Off} ${SECURE_INGRESS_PORT}"
-echo -e "${BGreen}TCP_INGRESS_PORT: ${Color_Off} ${TCP_INGRESS_PORT}"
-echo -e "${BGreen}INGRESS_DOMAIN: ${Color_Off} ${INGRESS_DOMAIN}"
+echo -e "${BGreen}TCP_INGRESS_PORT: ${Color_Off}    ${TCP_INGRESS_PORT}"
+echo -e "${BGreen}INGRESS_DOMAIN: ${Color_Off}      ${INGRESS_DOMAIN}"
 
 #! Deploy metric tools:
 # -> Prometheus
@@ -40,7 +40,7 @@ kubectl apply -f <(sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/configs/pr
 kubectl apply -f <(sed -e "s/INGRESS_DOMAIN/${INGRESS_DOMAIN}/" $ROOT/configs/tracing/expose-tracing.yaml)
 
 echo -e "${BGreen}Metric and Visualization Services can be accessed via:${Color_Off}"
-echo -e "${BGreen}Kiali:${Color_Off} http://kiali.${INGRESS_DOMAIN}"
+echo -e "${BGreen}Kiali:${Color_Off}      http://kiali.${INGRESS_DOMAIN}"
 echo -e "${BGreen}Prometheus:${Color_Off} http://prometheus.${INGRESS_DOMAIN}"
-echo -e "${BGreen}Grafana:${Color_Off} http://grafana.${INGRESS_DOMAIN}"
-echo -e "${BGreen}Tracing:${Color_Off} http://tracing.${INGRESS_DOMAIN}"
+echo -e "${BGreen}Grafana:${Color_Off}    http://grafana.${INGRESS_DOMAIN}"
+echo -e "${BGreen}Tracing:${Color_Off}    http://tracing.${INGRESS_DOMAIN}"
