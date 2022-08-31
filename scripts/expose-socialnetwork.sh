@@ -32,8 +32,7 @@ ADDED_PORTS="ports:
 export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
 #! Configure istio ingress gateway to open the ports needed for the socialnetwork's services
-kubectl get svc istio-ingressgateway -n istio-system -o yaml | \
-sed -e "s/ports:/${ADDED_PORTS}/" | \
+sed -e "s/ports:/${ADDED_PORTS}/" <(kubectl get svc istio-ingressgateway -n istio-system -o yaml)| \
 kubectl apply -f -
 
 #! Expose the nginx-thrift, media-frontend and jaeger for the social network application:
