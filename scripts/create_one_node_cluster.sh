@@ -18,6 +18,5 @@ if [ "$EUID" -eq 0 ]; then
 fi
 
 
-
 #! Setup for master node:
 $SCRIPTS/setup_master_node.sh

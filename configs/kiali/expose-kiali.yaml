@@ -12,7 +12,7 @@ spec:
         name: http-kiali
         protocol: HTTP
       hosts:
-        - "kiali.${INGRESS_DOMAIN}"
+        - "kiali.INGRESS_DOMAIN"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -21,7 +21,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - "kiali.${INGRESS_DOMAIN}"
+    - "kiali.INGRESS_DOMAIN"
   gateways:
     - kiali-gateway
   http:
