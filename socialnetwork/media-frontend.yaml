@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: media-frontend-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http-media-frontend
+      protocol: HTTP
+    hosts:
+    - "media.INGRESS_DOMAIN"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: media-frontend-vs
+spec:
+  hosts:
+  - "media.INGRESS_DOMAIN"
+  gateways:
+  - media-frontend-gateway
+  http:
+  - route:
+    - destination:
+        host: media-frontend
+        port:
+          number: 8081

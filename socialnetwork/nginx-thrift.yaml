@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: nginx-thrift-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http-nginx-thrift
+      protocol: HTTP
+    hosts:
+    - "nginx.INGRESS_DOMAIN"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx-thrift-vs
+spec:
+  hosts:
+  - "nginx.INGRESS_DOMAIN"
+  gateways:
+  - nginx-thrift-gateway
+  http:
+  - route:
+    - destination:
+        host: nginx-thrift
+        port:
+          number: 8080
