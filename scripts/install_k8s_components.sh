@@ -22,7 +22,7 @@ rm runc
 
 echo -e "${BGreen}Installing containerd binary...${Color_Off}"
 wget --continue --quiet https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-amd64.tar.gz
-sudo tar -C /usr/local -xvzf containerd-1.6.8-linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf containerd-1.6.8-linux-amd64.tar.gz
 rm containerd-1.6.8-linux-amd64.tar.gz
 
 echo -e "${BGreen}Installing containerd service...${Color_Off}"
