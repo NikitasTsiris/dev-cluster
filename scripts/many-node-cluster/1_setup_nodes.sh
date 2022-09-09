@@ -8,12 +8,12 @@ BRed='\033[1;31m'         # Red
 BGreen='\033[1;32m'       # Green
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-ROOT="$( cd $DIR && cd .. && .. && pwd)"
+ROOT="$( cd $DIR && cd .. && pwd)"
 SCRIPTS=$ROOT/scripts
 
-# echo -e "${BGreen}dir: ${Color_Off}" $DIR
-# echo -e "${BGreen}root: ${Color_Off}" $ROOT
-# echo -e "${BGreen}scripts: ${Color_Off}" $SCRIPTS
+echo -e "${BGreen}dir: ${Color_Off}" $DIR
+echo -e "${BGreen}root: ${Color_Off}" $ROOT
+echo -e "${BGreen}scripts: ${Color_Off}" $SCRIPTS
 
 #! Disable swap
 echo -e "${BGreen}Disabling swap in the system across reboots...${Color_Off}"

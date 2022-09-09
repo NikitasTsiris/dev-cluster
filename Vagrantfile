@@ -25,4 +25,22 @@ Vagrant.configure("2") do |config|
 
     config.vm.provision "shell", inline: $script, privileged: false
   end
+
+  config.vm.define "dev-vm-worker" do |node|
+
+    node.vm.box               = "generic/ubuntu2004"
+    node.vm.box_check_update  = false
+
+    node.vm.network "private_network" , ip: "192.168.121.221"
+    node.vm.hostname          = "dev-cluster-worker"
+
+    node.vm.provider :libvirt do |v|
+      v.cpu_mode = "host-passthrough"
+      v.memory  = 4096
+      v.nested  = true
+      v.cpus    = 4
+    end
+
+    config.vm.provision "shell", inline: $script, privileged: false
+  end
 end
