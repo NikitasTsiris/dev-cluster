@@ -23,8 +23,11 @@ spec:
   gateways:
     - nginx-web-server-gateway
   http:
-    - route:
-        - destination:
-            host: nginx-web-server
-            port:
-              number: 8080
+  - match:
+    - uri:
+        prefix: /
+    route:
+      - destination:
+          host: nginx-web-server
+          port:
+            number: 8080
