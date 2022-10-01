@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ROOT="$( cd $DIR && cd .. && cd .. && pwd)"
-SCRIPTS=$ROOT/scripts
+SCRIPTS=$ROOT/scripts/utils
 CRI_SOCK="unix:/run/containerd/containerd.sock"
 
 #! kubeadm init:

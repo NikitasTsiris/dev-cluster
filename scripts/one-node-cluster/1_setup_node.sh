@@ -9,7 +9,7 @@ BGreen='\033[1;32m'       # Green
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ROOT="$( cd $DIR && cd .. && cd .. && pwd)"
-SCRIPTS=$ROOT/scripts
+SCRIPTS=$ROOT/scripts/utils
 
 echo -e "${BGreen}dir: ${Color_Off}" $DIR
 echo -e "${BGreen}root: ${Color_Off}" $ROOT

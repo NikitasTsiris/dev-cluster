@@ -9,7 +9,7 @@ BGreen='\033[1;32m'       # Green
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ROOT="$( cd $DIR && cd .. && pwd)"
-SCRIPTS=$ROOT/scripts
+SCRIPTS=$ROOT/scripts/utils
 CRI_SOCK="/run/containerd/containerd.sock"
 
 # Untaint master (allow pods to be scheduled on master)
