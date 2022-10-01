@@ -1,14 +1,15 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: jaeger-gateway
+  name: social-network-jaeger-gateway
+  namespace: social-network
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
   servers:
     - port:
         number: 16686
-        name: http-jaeger
+        name: http-social-network-jaeger
         protocol: HTTP
       hosts:
         - "*"
@@ -16,15 +17,28 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: jaeger-vs
+  name: social-network-jaeger-vs
+  namespace: social-network
 spec:
   hosts:
     - "*"
   gateways:
-    - jaeger-gateway
+    - social-network-jaeger-gateway
   http:
     - route:
         - destination:
             host: jaeger
             port:
               number: 16686
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: social-network-jaeger
+  namespace: social-network
+spec:
+  host: jaeger
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---

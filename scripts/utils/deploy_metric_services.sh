@@ -8,7 +8,7 @@ BRed='\033[1;31m'         # Red
 BGreen='\033[1;32m'       # Green
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-ROOT="$( cd $DIR && cd .. && pwd)"
+ROOT="$( cd $DIR && cd .. && cd .. && pwd)"
 SCRIPTS=$ROOT/scripts
 
 #! Needed in order to expose the metrics' services

@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: media-frontend-gateway
+  namespace: social-network
 spec:
   selector:
     istio: ingressgateway # use Istio default gateway implementation
@@ -17,6 +18,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: media-frontend-vs
+  namespace: social-network
 spec:
   hosts:
     - "*"
@@ -28,3 +30,15 @@ spec:
             host: media-frontend
             port:
               number: 8081
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: media-frontend
+  namespace: social-network
+spec:
+  host: media-frontend
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---

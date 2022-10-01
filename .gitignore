@@ -1,3 +1,5 @@
 /.vagrant
 */calico.yaml
 */istio-*/
+istio-*/
+.vscode/settings.json
