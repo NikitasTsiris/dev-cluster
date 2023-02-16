@@ -25,10 +25,7 @@ spec:
   gateways:
     - nginx-web-server-gateway
   http:
-    - match:
-        - uri:
-            prefix: /
-      route:
+    - route:
         - destination:
             host: nginx-web-server
             port:

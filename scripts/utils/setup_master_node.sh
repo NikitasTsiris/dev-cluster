@@ -19,7 +19,7 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 #! Instal calico network add-on:
 echo -e "${BGreen}Deploying Calico network adapter...${Color_Off}"
-curl --silent --show-error  https://docs.projectcalico.org/manifests/calico.yaml -O
+curl --silent --show-error https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
 
 #! Configure cluster for metallb installation
