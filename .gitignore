@@ -4,3 +4,4 @@
 istio-*/
 .vscode/settings.json
 scripts/many-node-cluster/calico.yaml
+scripts/one-node-cluster/calico.yaml
