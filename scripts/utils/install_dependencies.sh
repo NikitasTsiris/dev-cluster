@@ -48,7 +48,7 @@ chmod 700 get_helm.sh
 rm get_helm.sh
 
 # Install Dependencies for Social Network Microservice Benchmark
-echo -e "${BGreen}Installing python and dependencies for SocialNetwork benchmark...${Color_Off}"
+echo -e "${BGreen}Installing python and dependencies for benchmarks...${Color_Off}"
 sudo apt-get -y install \
     python3 \
     python3-pip \

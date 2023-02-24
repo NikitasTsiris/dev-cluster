@@ -16,11 +16,13 @@ CRI_SOCK="/run/containerd/containerd.sock"
 echo -e "${BGreen}Removing taint from master node so pods can be scheduled there...${Color_Off}"
 kubectl taint nodes --all node-role.kubernetes.io/master-
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+echo -e "${BGreen}Removing taint DONE${Color_Off}"
 
 #! Instal calico network add-on:
 echo -e "${BGreen}Deploying Calico network adapter...${Color_Off}"
 curl --silent --show-error https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
+echo -e "${BGreen}Calico DONE${Color_Off}"
 
 #! Configure cluster for metallb installation
 #! Latest metallb version 13.4 does not give external IPs to LoadBalancers
@@ -35,6 +37,7 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/$METALLB_VERS
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/$METALLB_VERSION/manifests/metallb.yaml
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 kubectl apply -f $ROOT/configs/metallb/metallb-configmap.yaml
+echo -e "${BGreen}Metallb DONE${Color_Off}"
 
 #! Install and configure istio:
 cd $ROOT
@@ -45,9 +48,11 @@ export PATH=$PATH:$ROOT/istio-1.14.3/bin
 sudo sh -c  "echo 'export PATH=\$PATH:$ROOT/istio-1.14.3/bin' >> /etc/profile"
 source /etc/profile
 istioctl install --set profile=default -y
+echo -e "${BGreen}Istio DONE${Color_Off}"
 
 #! Enable sidecar injection in default namespace
 echo -e "${BGreen}Enabling automatic sidecar injection for default namespace...${Color_Off}"
 kubectl label namespace default istio-injection=enabled --overwrite
+echo -e "${BGreen}Automatic sidecar injection for default namespace DONE${Color_Off}"
 
 $SCRIPTS/deploy_metric_services.sh
