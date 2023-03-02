@@ -20,6 +20,8 @@ export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -
 #!
 #!
 
+$SCRIPTS/create_namespace_with_sidecar_injection.sh social-network
+
 #! Expose the nginx-thrift, media-frontend and jaeger for the social network application:
 kubectl apply -f $ROOT/socialnetwork/nginx-thrift.yaml
 kubectl apply -f $ROOT/socialnetwork/media-frontend.yaml

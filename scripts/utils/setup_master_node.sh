@@ -20,7 +20,8 @@ echo -e "${BGreen}Removing taint DONE${Color_Off}"
 
 #! Instal calico network add-on:
 echo -e "${BGreen}Deploying Calico network adapter...${Color_Off}"
-curl --silent --show-error https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml -O
+CALICO_VERSION=3.25.0
+curl --insecure --silent --show-error https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
 echo -e "${BGreen}Calico DONE${Color_Off}"
 
@@ -41,11 +42,11 @@ echo -e "${BGreen}Metallb DONE${Color_Off}"
 
 #! Install and configure istio:
 cd $ROOT
-ISTIO_VERSION=1.14.3
+ISTIO_VERSION=1.17.1
 echo -e "${BGreen}Installing Istio version: ${Color_Off} ${ISTIO_VERSION}"
-curl --silent --show-error -L https://istio.io/downloadIstio | ISTIO_VERSION=$ISTIO_VERSION TARGET_ARCH=x86_64 sh -
-export PATH=$PATH:$ROOT/istio-1.14.3/bin
-sudo sh -c  "echo 'export PATH=\$PATH:$ROOT/istio-1.14.3/bin' >> /etc/profile"
+curl --insecure --silent --show-error -L https://istio.io/downloadIstio | ISTIO_VERSION=$ISTIO_VERSION TARGET_ARCH=x86_64 sh -
+export PATH=$PATH:$ROOT/istio-$ISTIO_VERSION/bin
+sudo sh -c  "echo 'export PATH=\$PATH:$ROOT/istio-${ISTIO_VERSION}/bin' >> /etc/profile"
 source /etc/profile
 istioctl install --set profile=default -y
 echo -e "${BGreen}Istio DONE${Color_Off}"

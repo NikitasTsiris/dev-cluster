@@ -27,6 +27,7 @@ rm containerd-1.6.8-linux-amd64.tar.gz
 
 echo -e "${BGreen}Installing containerd service...${Color_Off}"
 wget --continue --quiet https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+sudo mkdir -p /usr/lib/systemd/system/
 sudo mv containerd.service /usr/lib/systemd/system/
 
 sudo systemctl daemon-reload
@@ -37,7 +38,7 @@ containerd --version || echo -e "${BRed}failed to build containerd${Color_Off}"
 #! Install K8s
 K8S_VERSION=1.24.3-00
 echo -e "${BGreen}Installing Kubernetes components version: ${Color_Off}" ${K8S_VERSION}
-curl --silent --show-error https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+curl --insecure --silent --show-error https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo sh -c "echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.list"
 sudo apt-get update >> /dev/null
 sudo apt-get -y install cri-tools ebtables ethtool kubeadm=$K8S_VERSION kubectl=$K8S_VERSION kubelet=$K8S_VERSION kubernetes-cni >> /dev/null

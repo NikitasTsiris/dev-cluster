@@ -5,3 +5,6 @@ istio-*/
 .vscode/settings.json
 scripts/many-node-cluster/calico.yaml
 scripts/one-node-cluster/calico.yaml
+scripts/one-node-cluster/containerd.service
+scripts/one-node-cluster/go1.18.linux-amd64.tar.gz
+calico.yaml
