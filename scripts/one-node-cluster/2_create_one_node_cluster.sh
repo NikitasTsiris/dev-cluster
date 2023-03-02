@@ -6,7 +6,7 @@ SCRIPTS=$ROOT/scripts/utils
 CRI_SOCK="unix:/run/containerd/containerd.sock"
 
 #! kubeadm init:
-sudo kubeadm init --ignore-preflight-errors=all --cri-socket=$CRI_SOCK --pod-network-cidr=192.168.0.0/16
+sudo kubeadm init --ignore-preflight-errors=all --cri-socket=$CRI_SOCK --pod-network-cidr=10.244.0.0/16
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config

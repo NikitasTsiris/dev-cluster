@@ -18,25 +18,49 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 echo -e "${BGreen}Removing taint DONE${Color_Off}"
 
-#! Instal calico network add-on:
-echo -e "${BGreen}Deploying Calico network adapter...${Color_Off}"
-CALICO_VERSION=3.25.0
-curl --insecure --silent --show-error https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/manifests/calico.yaml -O
-kubectl apply -f calico.yaml
-echo -e "${BGreen}Calico DONE${Color_Off}"
+# #! Instal calico network add-on:
+# echo -e "${BGreen}Deploying Calico network adapter...${Color_Off}"
+# CALICO_VERSION=3.25.0
+# curl --insecure --silent --show-error https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/manifests/calico.yaml -O
+# kubectl apply -f calico.yaml
+# echo -e "${BGreen}Calico DONE${Color_Off}"
+
+#! Instal flannel network add-on:
+echo -e "${BGreen}Deploying Flannel network adapter...${Color_Off}"
+FLANNEL_VERSION=v0.21.2
+kubectl apply -f kubectl apply -f https://github.com/flannel-io/flannel/releases/download/$FLANNEL_VERSION/kube-flannel.yml
+echo -e "${BGreen}Flannel DONE${Color_Off}"
+
 
 #! Configure cluster for metallb installation
 #! Latest metallb version 13.4 does not give external IPs to LoadBalancers
-METALLB_VERSION=v0.9.4
-echo -e "${BGreen}Configuring and installing Metallb version:${Color_Off} ${METALLB_VERSION}"
+# METALLB_VERSION=v0.9.4
+# echo -e "${BGreen}Configuring and installing Metallb version:${Color_Off} ${METALLB_VERSION}"
 
+# kubectl get configmap kube-proxy -n kube-system -o yaml | \
+# sed -e "s/strictARP: false/strictARP: true/" | \
+# kubectl apply -f - -n kube-system
+
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/$METALLB_VERSION/manifests/namespace.yaml
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/$METALLB_VERSION/manifests/metallb.yaml
+# kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+# kubectl apply -f $ROOT/configs/metallb/metallb-configmap.yaml
+# echo -e "${BGreen}Metallb DONE${Color_Off}"
+
+echo -e "${BGreen}Configuring and installing Metallb version:${Color_Off} ${METALLB_VERSION}"
+METALLB_VERSION=v0.13.9
+# see what changes would be made, returns nonzero returncode if different
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" | \
+kubectl diff -f - -n kube-system
+
+# actually apply the changes, returns nonzero returncode on errors only
 kubectl get configmap kube-proxy -n kube-system -o yaml | \
 sed -e "s/strictARP: false/strictARP: true/" | \
 kubectl apply -f - -n kube-system
 
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/$METALLB_VERSION/manifests/namespace.yaml
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/$METALLB_VERSION/manifests/metallb.yaml
-kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/$METALLB_VERSION/config/manifests/metallb-native.yaml
+
 kubectl apply -f $ROOT/configs/metallb/metallb-configmap.yaml
 echo -e "${BGreen}Metallb DONE${Color_Off}"
 

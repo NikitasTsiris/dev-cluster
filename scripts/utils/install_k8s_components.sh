@@ -36,7 +36,7 @@ sudo systemctl enable --now containerd
 containerd --version || echo -e "${BRed}failed to build containerd${Color_Off}"
 
 #! Install K8s
-K8S_VERSION=1.24.3-00
+K8S_VERSION=1.26.1-00
 echo -e "${BGreen}Installing Kubernetes components version: ${Color_Off}" ${K8S_VERSION}
 curl --insecure --silent --show-error https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo sh -c "echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.list"
